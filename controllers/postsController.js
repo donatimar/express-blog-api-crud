@@ -1,7 +1,23 @@
 const posts = require("../data/postsData");
 
 const getAllPosts = (req, res) => {
-  res.json({ message: "Lista dei post", posts, postCount: posts.length });
+  const { tag } = req.query; // Ottieni il tag dal parametro di query
+
+  // FILTER POST
+  if (tag) {
+    const filteredPosts = posts.filter((post) => post.tags.includes(tag));
+    return res.json({
+      message: `Lista dei post con il tag ${tag}`,
+      posts: filteredPosts,
+      postCount: filteredPosts.length,
+    });
+  }
+
+  res.json({
+    message: "Lista dei post",
+    posts,
+    postCount: posts.length,
+  });
 };
 
 // INDEX
