@@ -1,9 +1,8 @@
 const posts = require("../data/postsData");
 
 const getAllPosts = (req, res) => {
-  const { tag } = req.query; // Ottieni il tag dal parametro di query
+  const { tag } = req.query;
 
-  // FILTER POST
   if (tag) {
     const filteredPosts = posts.filter((post) => post.tags.includes(tag));
     return res.json({
@@ -20,12 +19,14 @@ const getAllPosts = (req, res) => {
   });
 };
 
-// INDEX
+// INDEX (Show)
 const getPostByIndex = (req, res) => {
   const index = parseInt(req.params.index);
+
   if (index < 0 || index >= posts.length) {
     return res.status(404).json({ error: "Post non trovato" });
   }
+
   res.json({ message: `Dettagli del post ${index}`, post: posts[index] });
 };
 
@@ -43,13 +44,16 @@ const createPost = (req, res) => {
 // UPDATE
 const updatePost = (req, res) => {
   const index = parseInt(req.params.index);
+
   if (index < 0 || index >= posts.length) {
     return res.status(404).json({ error: "Post non trovato" });
   }
+
   const { titolo, contenuto, immagine, tags } = req.body;
   if (!titolo || !contenuto || !immagine || !Array.isArray(tags)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
+
   const updatedPost = { titolo, contenuto, immagine, tags };
   posts[index] = updatedPost;
   res.json({ message: `Post ${index} aggiornato`, post: updatedPost });
@@ -58,9 +62,11 @@ const updatePost = (req, res) => {
 // DELETE
 const deletePost = (req, res) => {
   const index = parseInt(req.params.index);
+
   if (index < 0 || index >= posts.length) {
     return res.status(404).json({ error: "Post non trovato" });
   }
+
   const deletedPost = posts.splice(index, 1);
   console.log("Post aggiornato:", posts);
   res.status(204).send();
