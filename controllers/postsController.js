@@ -32,10 +32,13 @@ const getPostByIndex = (req, res) => {
 
 // CREATE
 const createPost = (req, res) => {
+  console.log("Dati ricevuti:", req.body);
+
   const { titolo, contenuto, immagine, tags } = req.body;
   if (!titolo || !contenuto || !immagine || !Array.isArray(tags)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
+
   const newPost = { titolo, contenuto, immagine, tags };
   posts.push(newPost);
   res.json({ message: "Post creato", post: newPost });
