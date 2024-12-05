@@ -1,5 +1,5 @@
+const cors = require("cors");
 const express = require("express");
-const cors = require("cors"); // Importa il pacchetto CORS
 const app = express();
 const port = 3000;
 
@@ -7,7 +7,6 @@ const port = 3000;
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 
-// Abilita CORS per tutte le richieste
 app.use(cors());
 
 app.use(express.static("public"));
