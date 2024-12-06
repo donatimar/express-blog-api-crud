@@ -34,12 +34,12 @@ const getPostByIndex = (req, res) => {
 const createPost = (req, res) => {
   console.log("Dati ricevuti:", req.body);
 
-  const { titolo, contenuto, immagine, tags } = req.body;
-  if (!titolo || !contenuto || !immagine || !Array.isArray(tags)) {
+  const { title, content, image, category } = req.body;
+  if (!title || !content || !image || !Array.isArray(tags)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
 
-  const newPost = { titolo, contenuto, immagine, tags };
+  const newPost = { title, content, image, category };
   posts.push(newPost);
   res.json({ message: "Post creato", post: newPost });
 };
@@ -52,12 +52,12 @@ const updatePost = (req, res) => {
     return res.status(404).json({ error: "Post non trovato" });
   }
 
-  const { titolo, contenuto, immagine, tags } = req.body;
-  if (!titolo || !contenuto || !immagine || !Array.isArray(tags)) {
+  const { title, content, image, category } = req.body;
+  if (!title || !content || !image || !Array.isArray(tags)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
 
-  const updatedPost = { titolo, contenuto, immagine, tags };
+  const updatedPost = { title, content, image, category };
   posts[index] = updatedPost;
   res.json({ message: `Post ${index} aggiornato`, post: updatedPost });
 };
