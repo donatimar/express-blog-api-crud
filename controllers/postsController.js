@@ -35,7 +35,7 @@ const createPost = (req, res) => {
   console.log("Dati ricevuti:", req.body);
 
   const { title, content, image, category } = req.body;
-  if (!title || !content || !image || !Array.isArray(tags)) {
+  if (!title || !content || !image || !Array.isArray(category)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
 
@@ -53,7 +53,7 @@ const updatePost = (req, res) => {
   }
 
   const { title, content, image, category } = req.body;
-  if (!title || !content || !image || !Array.isArray(tags)) {
+  if (!title || !content || !image || !Array.isArray(category)) {
     return res.status(400).json({ error: "Dati non validi" });
   }
 
